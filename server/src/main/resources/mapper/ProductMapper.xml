@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gorgeous.bookshop.mapper.ProductMapper">
+    <resultMap id="BaseResultMap" type="map">
+        <id column="uid" property="uid"/>
+        <result column="ownerName" property="ownerName"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="price" property="price"/>
+        <result column="image" property="image"/>
+        <result column="creatAt" property="creatAt"/>
+    </resultMap>
+
+    <select id="loadItems" resultType="com.gorgeous.bookshop.bean.ItemInfo">
+        select * from item_info order by creatAt desc;
+    </select>
+
+    <insert id="submitItem" parameterType="com.gorgeous.bookshop.bean.ItemInfo" >
+        insert into item_info (uid, ownerName, name, description, price, image, creatAt)
+        values (#{uid}, #{ownerName}, #{name}, #{description}, #{price}, #{image}, #{creatAt});
+    </insert>
+
+    <update id="updateProduct" parameterType="com.gorgeous.bookshop.bean.ItemInfo">
+        update item_info
+        set description=#{description}, price=#{price}, image=#{image}, name=#{name}
+        where uid=#{uid}
+    </update>
+
+    <delete id="deleteProductUnit" parameterType="String">
+        delete from item_info where uid=#{uid}
+    </delete>
+
+    <update id="updateState" parameterType="String">
+        update item_info
+        set isPicked='1'
+        where uid = #{itemUid}
+    </update>
+
+    <select id="qryItemState" resultType="java.util.Map" parameterType="String">
+        select isPicked, name as itemName from item_info where uid=#{itemUid};
+    </select>
+
+</mapper>

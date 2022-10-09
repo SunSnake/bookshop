@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gorgeous.bookshop.mapper.OrderInfoMapper">
+    <resultMap id="BaseResultMap" type="map">
+        <id column="uid" property="uid"/>
+        <result column="ownerName" property="ownerName"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="sum" property="sum"/>
+        <result column="creatAt" property="creatAt"/>
+        <result column="orderListUid" property="orderListUid"/>
+        <result column="orderNumber" property="orderNumber"/>
+        <result column="orderState" property="orderState"/>
+    </resultMap>
+
+    <insert id="submitOrder" parameterType="com.gorgeous.bookshop.bean.OrderInfo" >
+        insert into order_info (uid, ownerName, name, phone, address, sum, creatAt, orderListUid, orderNumber, orderState)
+        values (#{uid}, #{ownerName}, #{name}, #{phone}, #{address}, #{sum}, #{creatAt}, #{orderListUid}, #{orderNumber}, #{orderState});
+    </insert>
+
+    <select id="loadOrders" resultMap="BaseResultMap">
+        select * from order_info WHERE ownerName=#{ownerName} order by creatAt desc;
+    </select>
+
+    <select id="loadOrderLists" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select name as itemName, description, price, image, isPicked from item_info
+        where uid in (
+            select itemUid from order_list where uid=#{orderListUid}
+        )
+    </select>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into order_list(uid, itemUid)
+        values
+            <foreach collection="list" item="item" index="index" separator=",">
+                (#{item.uid}, #{item.itemUid})
+            </foreach>
+    </insert>
+
+    <delete id="deleteOrder" parameterType="String">
+        delete from order_info where uid=#{uid};
+    </delete>
+
+    <delete id="deleteOrderList" parameterType="String">
+        delete from order_list where uid in (select orderListUid from order_info where uid=#{uid});
+    </delete>
+
+    <select id="getOrderUid" resultMap="BaseResultMap" parameterType="String">
+        SELECT name, phone, address, uid FROM `order_info`WHERE orderListUid in
+        (SELECT uid FROM `order_list` WHERE itemUid=#{itemUid})
+    </select>
+
+    <update id="confirmOrder" parameterType="java.util.Map">
+        update item_info set isPicked='2' where uid = #{itemUid};
+        update order_info set orderState='已出单' where uid = #{uid};
+    </update>
+
+    <update id="cancelOrder" parameterType="java.util.Map">
+        update item_info set isPicked='0' where uid = #{itemUid};
+        update order_info set orderState='已被取消' where uid = #{uid};
+    </update>
+
+</mapper>

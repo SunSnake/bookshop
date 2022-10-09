@@ -1,0 +1,17 @@
+
+<view class="container" xmlns:wx="http://www.w3.org/1999/xhtml">
+
+  <van-sticky class="width_100">
+    <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+  </van-sticky>
+
+  <view>
+    <div class="item-show-block padding_LR" wx:for="{{items}}" wx:key="uid" wx:for-item="item"
+         bindtap="showItemDetail" data-item="{{item}}">
+
+      <image class="image-class" src="{{item.image}}" mode="aspectFill"></image>
+      <div class="description-class">{{item.name}}</div>
+    </div>
+  </view>
+
+</view>

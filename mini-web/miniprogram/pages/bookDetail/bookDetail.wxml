@@ -1,0 +1,9 @@
+<!--bookcase.wxml-->
+<view class="container" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view>
+    <div>bookDetail</div>
+    <div class="item-show-block" wx:for="{{items}}" wx:key="uid" wx:for-item="item">
+      <div class="description-class">{{item.name}}</div>
+    </div>
+  </view>
+</view>

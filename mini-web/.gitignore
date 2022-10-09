@@ -1,0 +1,6 @@
+# Project exclude paths
+/miniprogram/pages/index/index.js
+/miniprogram/pages/logs/logs.js
+/miniprogram/pages/user/user.js
+/miniprogram/utils/util.js
+/miniprogram/app.js
