@@ -1,9 +1,33 @@
 <!--bookcase.wxml-->
 <view class="container" xmlns:wx="http://www.w3.org/1999/xhtml">
-  <view>
-    <div>user</div>
-    <div class="item-show-block" wx:for="{{items}}" wx:key="uid" wx:for-item="item">
-      <div class="description-class">{{item.name}}</div>
-    </div>
+
+  <view class="userinfo padding_LR">
+    <block wx:if="{{canIUseOpenData}}" bindtap="bindViewTap">
+      <div class="userinfo-avatar">
+        <open-data type="userAvatarUrl"></open-data>
+      </div>
+      <div class="userinfo-name">
+        <open-data type="userNickName"></open-data>
+      </div>
+    </block>
+
+    <block wx:elif="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
+    </block>
+
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
   </view>
+
+  <van-divider />
+
+  <van-cell title="我的购物车" is-link icon="shopping-cart-o"/>
+  <van-cell title="我的订单" is-link icon="shop-o"/>
+  <van-cell title="客服答疑" is-link icon="phone-o"/>
+  <van-cell title="设置" is-link icon="setting-o"/>
+
 </view>

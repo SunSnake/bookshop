@@ -81,7 +81,7 @@ public class RespData implements Serializable {
     }
 
     public static String toStringGzip(Object obj) {
-        return new String(ZipUtil.gzip(obj.toString(), "ISO-8859-1"), StandardCharsets.ISO_8859_1);
+        return new String(ZipUtil.gzip(obj.toString(), StandardCharsets.UTF_8.name()), StandardCharsets.ISO_8859_1);
     }
 
 }

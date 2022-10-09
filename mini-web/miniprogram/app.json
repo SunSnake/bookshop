@@ -2,7 +2,6 @@
   "pages": [
     "pages/main/main",
     "pages/logs/logs",
-    "pages/former/former",
     "pages/user/user",
     "pages/bookcase/bookcase",
     "pages/friend/friend",
