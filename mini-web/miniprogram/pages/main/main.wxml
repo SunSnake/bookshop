@@ -10,7 +10,7 @@
          bindtap="showItemDetail" data-item="{{item}}">
 
       <image class="image-class" src="{{item.image}}" mode="aspectFill"></image>
-      <div class="description-class">{{item.name}}</div>
+      <div class="description-class width_100">{{item.name}}</div>
     </div>
   </view>
 

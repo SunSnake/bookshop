@@ -2,6 +2,8 @@
 import {unzip} from '../../utils/pako'
 import {str2List} from '../../utils/util'
 
+const app = getApp();
+
 Page({
   data: {
     items: [] as any[]
@@ -12,27 +14,28 @@ Page({
   },
 
   onShow() {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
+    let tabBar = this.getTabBar();
+    if (typeof this.getTabBar === 'function' && tabBar) {
+      tabBar.setData({
         active: getApp().globalData.active
       })
     }
   },
 
   loadItems() {
-    wx.request({
-      url: 'http://127.0.0.1:8080/unit/loadItems',
-      success: (res) => {
-        let dataStr = unzip(res.data);
-        let list: any[] = str2List(dataStr);
+    app.getRequest('/unit/loadItems', {}, (resp) => {
+      let dataStr = unzip(resp);
+      let list: any[] = str2List(dataStr);
 
-        this.setData({
-          items: list.map((item: Object) => {
-            return JSON.parse(<string>item);
-          }),
-        })
-      }
+      this.setData({
+        items: list.map((item: Object) => {
+          return JSON.parse(<string>item);
+        }),
+      })
+    }, (err) => {
+      console.log(err.errMsg)
     })
+
   },
 
   showItemDetail(e) {

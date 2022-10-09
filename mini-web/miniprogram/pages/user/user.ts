@@ -1,10 +1,13 @@
 // index.ts
 Page({
+
   onShow() {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
+    let tabBar = this.getTabBar();
+    if (typeof this.getTabBar === 'function' && tabBar) {
+      tabBar.setData({
         active: getApp().globalData.active
       })
     }
   },
+
 })
