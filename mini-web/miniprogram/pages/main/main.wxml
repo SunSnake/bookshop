@@ -5,13 +5,13 @@
     <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
   </van-sticky>
 
-  <view class="bottom_tar_distance">
+  <scroll-view scroll-y='true' bindscrolltolower='loadPage' class="bottom_tar_distance">
     <div class="item-show-block padding_LR width_100" wx:for="{{items}}" wx:key="uid" wx:for-item="item"
          bindtap="showItemDetail" data-item="{{item}}">
 
       <image class="image-class" src="{{item.image}}" mode="aspectFill"></image>
       <div class="description-class width_100">{{item.name}}</div>
     </div>
-  </view>
+  </scroll-view>
 
 </view>

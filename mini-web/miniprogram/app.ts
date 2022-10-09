@@ -20,8 +20,11 @@ App<IAppOption>({
     })
   },
 
-  getRequest(url, data, success, failCallback) {
-    getApp().wxRequest('GET', url, data, '', success, failCallback)
+  getRequest(url, page, pageSize, success, failCallback) {
+    if (page !== '' && pageSize != '') {
+      url += '?page=' + page + '&pageSize=' + pageSize;
+    }
+    getApp().wxRequest('GET', url, {}, '', success, failCallback)
   },
 
   postRequest(url, data, success, failCallback) {

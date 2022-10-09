@@ -16,11 +16,11 @@
 
     <insert id="submitOrder" parameterType="com.gorgeous.bookshop.bean.OrderInfo" >
         insert into order_info (uid, ownerName, name, phone, address, sum, creatAt, orderListUid, orderNumber, orderState)
-        values (#{uid}, #{ownerName}, #{name}, #{phone}, #{address}, #{sum}, #{creatAt}, #{orderListUid}, #{orderNumber}, #{orderState});
+        values (#{uid}, #{ownerName}, #{name}, #{phone}, #{address}, #{sum}, #{creatAt}, #{orderListUid}, #{orderNumber}, #{orderState})
     </insert>
 
     <select id="loadOrders" resultMap="BaseResultMap">
-        select * from order_info WHERE ownerName=#{ownerName} order by creatAt desc;
+        select * from order_info WHERE ownerName=#{ownerName} order by creatAt desc
     </select>
 
     <select id="loadOrderLists" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -43,7 +43,7 @@
     </delete>
 
     <delete id="deleteOrderList" parameterType="String">
-        delete from order_list where uid in (select orderListUid from order_info where uid=#{uid});
+        delete from order_list where uid in (select orderListUid from order_info where uid=#{uid})
     </delete>
 
     <select id="getOrderUid" resultMap="BaseResultMap" parameterType="String">
@@ -53,12 +53,12 @@
 
     <update id="confirmOrder" parameterType="java.util.Map">
         update item_info set isPicked='2' where uid = #{itemUid};
-        update order_info set orderState='已出单' where uid = #{uid};
+        update order_info set orderState='已出单' where uid = #{uid}
     </update>
 
     <update id="cancelOrder" parameterType="java.util.Map">
         update item_info set isPicked='0' where uid = #{itemUid};
-        update order_info set orderState='已被取消' where uid = #{uid};
+        update order_info set orderState='已被取消' where uid = #{uid}
     </update>
 
 </mapper>

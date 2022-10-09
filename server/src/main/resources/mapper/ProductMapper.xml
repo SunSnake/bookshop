@@ -12,12 +12,12 @@
     </resultMap>
 
     <select id="loadItems" resultType="com.gorgeous.bookshop.bean.ItemInfo">
-        select * from item_info order by creatAt desc;
+        select * from item_info order by creatAt desc
     </select>
 
     <insert id="submitItem" parameterType="com.gorgeous.bookshop.bean.ItemInfo" >
         insert into item_info (uid, ownerName, name, description, price, image, creatAt)
-        values (#{uid}, #{ownerName}, #{name}, #{description}, #{price}, #{image}, #{creatAt});
+        values (#{uid}, #{ownerName}, #{name}, #{description}, #{price}, #{image}, #{creatAt})
     </insert>
 
     <update id="updateProduct" parameterType="com.gorgeous.bookshop.bean.ItemInfo">
@@ -37,7 +37,7 @@
     </update>
 
     <select id="qryItemState" resultType="java.util.Map" parameterType="String">
-        select isPicked, name as itemName from item_info where uid=#{itemUid};
+        select isPicked, name as itemName from item_info where uid=#{itemUid}
     </select>
 
 </mapper>

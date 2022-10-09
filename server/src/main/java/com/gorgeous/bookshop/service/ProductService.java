@@ -1,6 +1,7 @@
 package com.gorgeous.bookshop.service;
 
 import cn.hutool.json.JSONUtil;
+import com.github.pagehelper.PageHelper;
 import com.gorgeous.bookshop.bean.ItemInfo;
 import com.gorgeous.bookshop.mapper.ProductMapper;
 import com.gorgeous.bookshop.utils.DateUtil;
@@ -24,8 +25,9 @@ public class ProductService {
     @Autowired
     ItemInfo itemInfo;
 
-    public List<PowerJSON> loadItems() {
+    public List<PowerJSON> loadItems(String page, String pageSize) {
         List<PowerJSON> list = new ArrayList<>();
+        PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(pageSize));
         List<ItemInfo> itemInfos = productMapper.loadItems();
         for (ItemInfo info : itemInfos) {
             String examAttendStr = JSONUtil.toJsonStr(info);

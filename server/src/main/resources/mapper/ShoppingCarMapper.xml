@@ -6,17 +6,17 @@
         select * from item_info
         where item_info.uid=any(
           select itemUid from item_cart
-          where buyerName=#{buyerName});
+          where buyerName=#{buyerName})
     </select>
 
     <insert id="addToCart" parameterType="com.gorgeous.bookshop.bean.ItemCart" >
-        insert into item_cart (itemUid, buyerName) values (#{itemUid}, #{buyerName});
+        insert into item_cart (itemUid, buyerName) values (#{itemUid}, #{buyerName})
     </insert>
 
     <delete id="deleteCartItem" parameterType="com.gorgeous.bookshop.bean.ItemCart" >
         delete from item_cart
         where itemUid=#{itemUid}
-        and buyerName=#{buyerName};
+        and buyerName=#{buyerName}
     </delete>
 
 </mapper>

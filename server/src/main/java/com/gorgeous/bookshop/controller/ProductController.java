@@ -25,8 +25,8 @@ public class ProductController {
 
     @ApiOperation("加载所有商品列表")
     @RequestMapping(value = "/loadItems", method = RequestMethod.GET)
-    public List<PowerJSON> loadItems() {
-        return productService.loadItems();
+    public List<PowerJSON> loadItems(@RequestParam String page, @RequestParam String pageSize) {
+        return productService.loadItems(page, pageSize);
     }
 
     @ApiOperation("新增商品")

@@ -3,16 +3,16 @@
 <mapper namespace="com.gorgeous.bookshop.mapper.SysMemberMapper">
 
     <select id="validateUserByUsername" parameterType="String" resultType="com.gorgeous.bookshop.bean.SysMember">
-        SELECT * FROM sys_member WHERE username = #{username};
+        SELECT * FROM sys_member WHERE username = #{username}
     </select>
 
     <select id="getCountByUsername" parameterType="String" resultType="integer">
-        select COUNT(*) from sys_member where username=#{username};
+        select COUNT(*) from sys_member where username=#{username}
     </select>
 
     <insert id="insertUser" parameterType="com.gorgeous.bookshop.bean.SysMember" >
         insert into sys_member (uid, username, password)
-        values (#{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR});
+        values (#{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
     </insert>
 
 </mapper>
