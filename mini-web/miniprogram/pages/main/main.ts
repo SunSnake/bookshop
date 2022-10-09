@@ -1,6 +1,4 @@
 // index.ts
-import {unzip} from '../../utils/pako'
-import {str2List} from '../../utils/util'
 
 const app = getApp();
 
@@ -24,24 +22,17 @@ Page({
 
   loadItems() {
     app.getRequest('/unit/loadItems', {}, (resp) => {
-      let dataStr = unzip(resp);
-      let list: any[] = str2List(dataStr);
-
       this.setData({
-        items: list.map((item: Object) => {
-          return JSON.parse(<string>item);
-        }),
+        items: resp
       })
     }, (err) => {
       console.log(err.errMsg)
     })
-
   },
 
   showItemDetail(e) {
     let item = e.currentTarget.dataset.item;
     let dataStr = JSON.stringify(item)
-    //console.log(dataStr)
     wx.navigateTo({
       url: '../bookDetail/bookDetail?dataStr=' + encodeURIComponent(dataStr)
     });

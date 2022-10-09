@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,14 +24,14 @@ public class ProductService {
     @Autowired
     ItemInfo itemInfo;
 
-    public List<ItemInfo> loadItems() {
+    public List<PowerJSON> loadItems() {
+        List<PowerJSON> list = new ArrayList<>();
         List<ItemInfo> itemInfos = productMapper.loadItems();
         for (ItemInfo info : itemInfos) {
             String examAttendStr = JSONUtil.toJsonStr(info);
-            PowerJSON jsonObject = new PowerJSON(examAttendStr);
-            System.out.println(jsonObject);
+            list.add(new PowerJSON(examAttendStr));
         }
-        return itemInfos;
+        return list;
     }
 
     public RespData submitItem(Map<String,Object> map){
