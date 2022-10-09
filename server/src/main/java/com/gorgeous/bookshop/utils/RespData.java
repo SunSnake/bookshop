@@ -1,6 +1,9 @@
 package com.gorgeous.bookshop.utils;
 
+import cn.hutool.core.util.ZipUtil;
+
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author Gorgeous
@@ -75,6 +78,10 @@ public class RespData implements Serializable {
     @Override
     public String toString() {
         return "RespData [code=" + code + ", data=" + data + ", msg=" + msg  + "]";
+    }
+
+    public static String toStringGzip(Object obj) {
+        return new String(ZipUtil.gzip(obj.toString(), "ISO-8859-1"), StandardCharsets.ISO_8859_1);
     }
 
 }

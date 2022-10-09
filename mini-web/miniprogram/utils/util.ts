@@ -17,3 +17,10 @@ const formatNumber = (n: number) => {
   const s = n.toString()
   return s[1] ? s : '0' + s
 }
+
+export const str2List = (str) => {
+  if (str.substring(0, 1) !== "[" || str.substring(str.length - 1) !== "]") {
+    throw new Error("数组格式非法！")
+  }
+  return str.substring(1, str.length-1).split(", ");
+}

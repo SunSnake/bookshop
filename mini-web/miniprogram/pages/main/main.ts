@@ -1,4 +1,7 @@
 // index.ts
+import {unzip} from '../../utils/pako'
+import {str2List} from '../../utils/util'
+
 Page({
   data: {
     items: [] as any[]
@@ -20,11 +23,12 @@ Page({
     wx.request({
       url: 'http://127.0.0.1:8080/unit/loadItems',
       success: (res) => {
-        let list: any[] = res.data as any[];
+        let dataStr = unzip(res.data);
+        let list: any[] = str2List(dataStr);
+
         this.setData({
           items: list.map((item: Object) => {
-            //console.log('log');
-            return item;
+            return JSON.parse(<string>item);
           }),
         })
       }
