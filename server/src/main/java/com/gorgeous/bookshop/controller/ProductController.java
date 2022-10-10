@@ -2,14 +2,12 @@ package com.gorgeous.bookshop.controller;
 
 import com.gorgeous.bookshop.bean.ItemInfo;
 import com.gorgeous.bookshop.service.ProductService;
-import com.gorgeous.bookshop.utils.PowerJSON;
 import com.gorgeous.bookshop.utils.RespData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,7 +23,7 @@ public class ProductController {
 
     @ApiOperation("加载所有商品列表")
     @RequestMapping(value = "/loadItems", method = RequestMethod.GET)
-    public List<PowerJSON> loadItems(@RequestParam String page, @RequestParam String pageSize) {
+    public RespData loadItems(@RequestParam String page, @RequestParam String pageSize) {
         return productService.loadItems(page, pageSize);
     }
 

@@ -1,15 +1,19 @@
 package com.gorgeous.bookshop.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gorgeous.bookshop.bean.ItemInfo;
+import com.gorgeous.bookshop.utils.PowerJSON;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface ProductMapper {
+public interface ProductMapper extends BaseMapper<PowerJSON> {
 
-    List<ItemInfo> loadItems();
+    Page<PowerJSON> loadItems(Page<PowerJSON> page, QueryWrapper<List<PowerJSON>> wrapper);
 
     int submitItem(ItemInfo itemInfo);
 

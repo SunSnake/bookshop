@@ -1,7 +1,6 @@
 package com.gorgeous.bookshop.service;
 
-import cn.hutool.json.JSONUtil;
-import com.github.pagehelper.PageHelper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gorgeous.bookshop.bean.ItemInfo;
 import com.gorgeous.bookshop.mapper.ProductMapper;
 import com.gorgeous.bookshop.utils.DateUtil;
@@ -10,14 +9,11 @@ import com.gorgeous.bookshop.utils.RespData;
 import com.gorgeous.bookshop.utils.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
-@Transactional
 public class ProductService {
     @Autowired
     ProductMapper productMapper;
@@ -25,15 +21,10 @@ public class ProductService {
     @Autowired
     ItemInfo itemInfo;
 
-    public List<PowerJSON> loadItems(String page, String pageSize) {
-        List<PowerJSON> list = new ArrayList<>();
-        PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(pageSize));
-        List<ItemInfo> itemInfos = productMapper.loadItems();
-        for (ItemInfo info : itemInfos) {
-            String examAttendStr = JSONUtil.toJsonStr(info);
-            list.add(new PowerJSON(examAttendStr));
-        }
-        return list;
+    public RespData loadItems(String current, String pageSize) {
+        Page<PowerJSON> page = new Page<>(Integer.parseInt(current), Integer.parseInt(pageSize));
+        Page<PowerJSON> result = productMapper.loadItems(page, null);
+        return RespData.buildSuccess(200, result, "加载成功");
     }
 
     public RespData submitItem(Map<String,Object> map){
