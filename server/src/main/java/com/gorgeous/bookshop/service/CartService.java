@@ -31,9 +31,9 @@ public class CartService {
         itemCart.setBuyerName(jsonObject.getString("buyerName"));
 
         if (shoppingCarMapper.addToCart(itemCart) == 1){
-            return RespData.buildSuccess("添加购物车成功！",200);
+            return RespData.success("添加购物车成功！");
         } else {
-            return RespData.buildError("添加购物车失败",200);
+            return RespData.error("添加购物车失败");
         }
     }
 
@@ -48,9 +48,9 @@ public class CartService {
         itemCart.setBuyerName(jsonObject.getString("buyerName"));
 
         if (shoppingCarMapper.deleteCartItem(itemCart) == 1){
-            return RespData.buildSuccess("删除商品成功！",200);
+            return RespData.success("删除商品成功！");
         } else {
-            return RespData.buildError("删除商品失败",200);
+            return RespData.error("删除商品失败");
         }
     }
 

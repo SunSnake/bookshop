@@ -24,7 +24,7 @@ public class ProductService {
     public RespData loadItems(String current, String pageSize) {
         Page<PowerJSON> page = new Page<>(Integer.parseInt(current), Integer.parseInt(pageSize));
         Page<PowerJSON> result = productMapper.loadItems(page, null);
-        return RespData.buildSuccess(200, result, "加载成功");
+        return RespData.success("加载成功", result);
     }
 
     public RespData submitItem(Map<String,Object> map){
@@ -39,9 +39,9 @@ public class ProductService {
         itemInfo.setCreatAt(DateUtil.getCurrentTime());
 
         if (productMapper.submitItem(itemInfo) == 1){
-            return RespData.buildSuccess("发布商品成功！",200);
+            return RespData.success("发布商品成功！");
         } else {
-            return RespData.buildError("发布失败",200);
+            return RespData.error("发布失败");
         }
     }
 
@@ -55,17 +55,17 @@ public class ProductService {
         itemInfo.setImage(jsonObject.getString("image"));
 
         if (productMapper.updateProduct(itemInfo) == 1){
-            return RespData.buildSuccess("更新信息成功！",200);
+            return RespData.success("更新信息成功！");
         } else {
-            return RespData.buildError("更新信息失败",200);
+            return RespData.error("更新信息失败");
         }
     }
 
     public RespData deleteProductUnit(String uid){
         if (productMapper.deleteProductUnit(uid) == 1){
-            return RespData.buildSuccess("删除成功！",200);
+            return RespData.success("删除成功！");
         } else {
-            return RespData.buildError("删除失败",200);
+            return RespData.error("删除失败");
         }
     }
 

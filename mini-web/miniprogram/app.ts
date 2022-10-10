@@ -3,6 +3,7 @@ App<IAppOption>({
   //设置全局请求URL
   globalData:{
     URL: 'http://127.0.0.1:8080',
+    sessionKey: ''
   },
 
   onLaunch() {
@@ -14,8 +15,21 @@ App<IAppOption>({
     // 登录
     wx.login({
       success: res => {
-        console.log(res)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        getApp().postRequest('/member/login', {code: res.code}, resp => {
+          if (resp.status == -1) {
+            wx.showToast({
+              title: resp.msg,
+              duration: 0,
+              mask: true
+            });
+            return;
+          }
+
+          wx.setStorageSync('sessionKey', resp.data)
+          console.log(resp)
+        }, err => {
+          console.log(err)
+        });
       },
     })
   },
@@ -24,11 +38,11 @@ App<IAppOption>({
     if (page !== '' && pageSize != '') {
       url += '?page=' + page + '&pageSize=' + pageSize;
     }
-    getApp().wxRequest('GET', url, {}, '', success, failCallback)
+    getApp().wxRequest('GET', url, {}, success, failCallback)
   },
 
   postRequest(url, data, success, failCallback) {
-    getApp().wxRequest('POST', url, data, '', success, failCallback)
+    getApp().wxRequest('POST', url, data, success, failCallback)
   },
 
   /**
@@ -39,7 +53,7 @@ App<IAppOption>({
    * callback： 请求成功回调函数
    * errFun： 请求失败回调函数
    **/
-  wxRequest(method, url, data, token, success, failCallback) {
+  wxRequest(method, url, data, success, failCallback) {
     wx.request({
       url: getApp().globalData.URL + url,
       method: method,
@@ -48,11 +62,11 @@ App<IAppOption>({
         // application/x-www-form-urlencoded
         'content-type': 'application/json;charset=UTF-8',
         'Accept': 'application/json',
-        'token': token
+        'token': wx.getStorageSync('sessionKey')
       },
       dataType: 'json',
       success: function (res) {
-        let resp = res.data
+        let resp:{} = res.data
         if (resp) {
           success(resp);
         } else {

@@ -34,14 +34,15 @@ public class SysMemberService {
         String password = jsonObject.getString("password");
 
         if (username == null || username.equals("")) {
-            return RespData.buildError("用户名不能为空！", 201);
+            return RespData.error("用户名不能为空！");
         }
+
         if (sysMemberMapper.getCountByUsername(username) > 0) {
-            return RespData.buildError("用户名已存在！", 202);
+            return RespData.error("用户名已存在！");
         }
 
         if (password == null || password.equals("")) {
-            return RespData.buildError("密码不能为空！", 203);
+            return RespData.error("密码不能为空！");
         }
 
         sysMember.setUid(UuidUtil.getUUID());
@@ -52,9 +53,9 @@ public class SysMemberService {
         if (encryptedData != null){
             sysMember.setPassword(encryptedData);
             sysMemberMapper.insertUser(sysMember);
-            return RespData.buildSuccess("注册成功", 200);
+            return RespData.success("注册成功");
         } else {
-            return RespData.buildError("注册失败", 201);
+            return RespData.error("注册失败");
         }
     }
 

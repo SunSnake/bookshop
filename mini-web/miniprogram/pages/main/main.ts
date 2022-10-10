@@ -1,4 +1,5 @@
 // index.ts
+import Toast from '@vant/weapp/toast/toast';
 
 const app = getApp();
 
@@ -30,6 +31,16 @@ Page({
       wx.hideLoading({
         success: (res) => {},
       });
+
+      if (resp.status == -1) {
+        Toast({
+          type: 'html',
+          message: resp.msg,
+          duration: 2000
+        });
+        return;
+      }
+
       let data = resp.data;
       //将旧数据与新数据合并
       let newList = oldList.concat(data.records);

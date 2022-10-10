@@ -56,7 +56,7 @@ public class OrderInfoService {
         for (String itemUid : uidList){
             Map<String, Object> itemMap = productService.qryItemState(itemUid);
             if (itemMap.get("isPicked") != null && (int)itemMap.get("isPicked") != 0){
-                return RespData.buildSuccess(201, itemMap.get("itemName"),"下单失败，商品  " + itemMap.get("itemName") + "  已被抢占，请重新下单！");
+                return RespData.success("下单失败，商品  " + itemMap.get("itemName") + "  已被抢占，请重新下单！", itemMap.get("itemName"));
             }
 
             Map<String,Object> map1 = new HashMap<>();
@@ -77,9 +77,9 @@ public class OrderInfoService {
                 map1.put("buyerName", jsonObject.getString("ownerName"));
                 cartService.deleteCartItem(map1);
             }
-            return RespData.buildSuccess("下单成功！",200);
+            return RespData.success("下单成功！");
         } else {
-            return RespData.buildError("下单失败",200);
+            return RespData.error("下单失败");
         }
     }
 
@@ -95,9 +95,9 @@ public class OrderInfoService {
     public RespData deleteOrder(String uid){
         orderInfoMapper.deleteOrderList(uid);
         if (orderInfoMapper.deleteOrder(uid) == 1){
-            return RespData.buildSuccess("删除成功！",200);
+            return RespData.success("删除成功！");
         } else {
-            return RespData.buildError("删除失败",200);
+            return RespData.error("删除失败");
         }
     }
 
@@ -107,17 +107,17 @@ public class OrderInfoService {
 
     public RespData confirmOrder(Map<String, Object> uidMap){
         if (orderInfoMapper.confirmOrder(uidMap) == 1){
-            return RespData.buildSuccess("接受订单成功！",200);
+            return RespData.success("接受订单成功！");
         } else {
-            return RespData.buildError("确认订单失败",200);
+            return RespData.error("确认订单失败");
         }
     }
 
     public RespData cancelOrder(Map<String, Object> uidMap){
         if (orderInfoMapper.cancelOrder(uidMap) == 1){
-            return RespData.buildSuccess("取消订单成功！",200);
+            return RespData.success("取消订单成功！");
         } else {
-            return RespData.buildError("取消订单失败",200);
+            return RespData.error("取消订单失败");
         }
     }
 }
