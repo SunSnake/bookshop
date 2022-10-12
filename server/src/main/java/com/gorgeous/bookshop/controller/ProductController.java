@@ -1,8 +1,8 @@
 package com.gorgeous.bookshop.controller;
 
 import com.gorgeous.bookshop.bean.ItemInfo;
+import com.gorgeous.bookshop.constant.RespData;
 import com.gorgeous.bookshop.service.ProductService;
-import com.gorgeous.bookshop.utils.RespData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

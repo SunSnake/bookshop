@@ -1,0 +1,33 @@
+
+#display-desc {
+  display: flex;
+  div {
+    margin-left: 10px;
+  }
+}
+
+#top-search-view {
+  .van-cell {
+    /*border: #ebedf0 0.1px solid !important;*/
+  }
+}
+
+#content-view {
+  height: 55vh;
+  .book-item {
+    display: flex;
+    ._title {
+      display: inline-block;
+      width: 25%;
+      text-align: right;
+    }
+    ._content {
+      display: inline-block;
+      width: 75%;
+      overflow: hidden;
+      white-space: nowrap;//内容超出不换行
+      text-overflow: ellipsis;
+
+    }
+  }
+}

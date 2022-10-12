@@ -1,21 +1,17 @@
 package com.gorgeous.bookshop.config;
 
-import com.gorgeous.bookshop.utils.RespData;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 public class CustomInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("token");
-        if (StringUtils.isEmpty(token)) {
+        /*if (StringUtils.isEmpty(token)) {
             response.setContentType("application/json; charset=utf-8");
             try {
                 PrintWriter writer = response.getWriter();
@@ -26,7 +22,7 @@ public class CustomInterceptor implements HandlerInterceptor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         return true;
     }

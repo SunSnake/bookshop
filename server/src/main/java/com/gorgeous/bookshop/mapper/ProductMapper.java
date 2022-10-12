@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gorgeous.bookshop.bean.ItemInfo;
-import com.gorgeous.bookshop.utils.PowerJSON;
+import com.gorgeous.bookshop.constant.PowerJSON;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

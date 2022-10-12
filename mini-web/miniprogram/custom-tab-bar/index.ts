@@ -16,25 +16,25 @@ Page({
 
       case 1:
         wx.switchTab({
-          url: '../friend/friend'
+          url: '../shopping/shopping'
         });
         break;
 
       case 2:
         wx.switchTab({
-          url: '../shopping/shopping'
+          url: '../user/user'
         });
         break;
 
       case 3:
         wx.switchTab({
-          url: '../bookcase/bookcase'
+          url: '../friend/friend'
         });
         break;
 
       case 4:
         wx.switchTab({
-          url: '../user/user'
+          url: '../bookcase/bookcase'
         });
         break;
     }

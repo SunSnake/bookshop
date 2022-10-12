@@ -1,7 +1,7 @@
 package com.gorgeous.bookshop.controller;
 
+import com.gorgeous.bookshop.constant.RespData;
 import com.gorgeous.bookshop.service.OrderInfoService;
-import com.gorgeous.bookshop.utils.RespData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

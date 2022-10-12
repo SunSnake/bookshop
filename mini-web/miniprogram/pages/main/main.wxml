@@ -6,11 +6,11 @@
   </van-sticky>
 
   <scroll-view scroll-y='true' bindscrolltolower='loadPage' class="bottom_tar_distance">
-    <div class="item-show-block padding_LR width_100" wx:for="{{items}}" wx:key="uid" wx:for-item="item"
-         bindtap="showItemDetail" data-item="{{item}}">
+    <div class="item-show-block padding_LR width_100" wx:for="{{books}}" wx:key="uid" wx:for-item="book"
+         bindtap="showItemDetail" data-item="{{book}}">
 
-      <image class="image-class" src="{{item.image}}" mode="aspectFill"></image>
-      <div class="description-class width_100">{{item.name}}</div>
+      <image class="image-class" src="{{book.photoUrl}}" mode="aspectFill"></image>
+      <div class="description-class width_100">{{book.name}}</div>
     </div>
   </scroll-view>
 

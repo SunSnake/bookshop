@@ -1,3 +1,5 @@
+import Toast from '@vant/weapp/toast/toast';
+
 export const formatTime = (date: Date) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -23,4 +25,16 @@ export const str2List = (str) => {
     throw new Error("数组格式非法！")
   }
   return str.substring(1, str.length-1).split(", ");
+}
+
+export const isEmpty = str => {
+  return str == null || str == "";
+}
+
+export const MsgToast = msg => {
+  Toast({
+    type: 'html',
+    message: msg,
+    duration: 2000
+  });
 }

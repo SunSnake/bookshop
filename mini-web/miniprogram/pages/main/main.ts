@@ -1,11 +1,11 @@
 // index.ts
-import Toast from '@vant/weapp/toast/toast';
+import {MsgToast} from "../../utils/util";
 
 const app = getApp();
 
 Page({
   data: {
-    items: [] as any[],
+    books: [] as any[],
     current: 1,//开始页面
     pageSize: 6, //初始页默认值
     total: 0
@@ -26,18 +26,12 @@ Page({
 
   loadItems() {
     //获取上次加载的旧数据，第一次为空
-    let oldList = this.data.items;
-    app.getRequest('/unit/loadItems', this.data.current, this.data.pageSize, (resp) => {
-      wx.hideLoading({
-        success: (res) => {},
-      });
+    let oldList = this.data.books;
+    app.getRequestWithPage('/book/loadBooks', this.data.current, this.data.pageSize, (resp) => {
+      wx.hideLoading();
 
       if (resp.status == -1) {
-        Toast({
-          type: 'html',
-          message: resp.msg,
-          duration: 2000
-        });
+        MsgToast(resp.msg);
         return;
       }
 
@@ -45,16 +39,17 @@ Page({
       //将旧数据与新数据合并
       let newList = oldList.concat(data.records);
       this.setData({
-        items: newList,
+        books: newList,
         total: data.total
       })
     }, (err) => {
-      console.log(err.errMsg)
+      wx.hideLoading();
+      MsgToast(err.errMsg);
     })
   },
 
   loadPage() {
-    if (this.data.items.length >= this.data.total) {
+    if (this.data.books.length >= this.data.total) {
       return false;
     }
 
@@ -70,8 +65,8 @@ Page({
   },
 
   showItemDetail(e) {
-    let item = e.currentTarget.dataset.item;
-    let dataStr = JSON.stringify(item)
+    let book = e.currentTarget.dataset.book;
+    let dataStr = JSON.stringify(book)
     wx.navigateTo({
       url: '../bookDetail/bookDetail?dataStr=' + encodeURIComponent(dataStr)
     });

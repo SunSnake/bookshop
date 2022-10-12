@@ -1,5 +1,73 @@
-<view class="container">
-  <view>
-    <div>shopping</div>
+<scroll-view scroll-y='true' class="container">
+
+  <view id="display-desc" class="padding_LR">
+    <van-image width="40vw" height="40vw" fit="cover" src="/img/isbn_example.jpg" />
+    <div>
+      <p style="color: red; display: block">温馨提示：</p>
+      <p>请翻到书籍背面条形码处，将isbn号输入查询，核对封面、作者等信息后即可确认</p>
+    </div>
   </view>
-</view>
+
+  <view id="top-search-view">
+    <van-cell-group>
+      <van-field
+        model:value="{{isbn}}"
+        left-icon="search"
+        center
+        clearable
+        placeholder="请输入13位书籍ISBN号"
+        border="{{ true }}"
+        use-button-slot
+      >
+        <van-button slot="button" size="small" type="info" bind:click="findBookByISBN">查询</van-button>
+      </van-field>
+    </van-cell-group>
+  </view>
+
+  <view id="content-view" hidden="{{hideContent}}">
+    <div class="padding_LR">
+      <van-image width="40vw" height="40vw" fit="contain" src="{{book.photoUrl}}" />
+      <div class="book-item">
+        <div class="_title">ISBN号：</div>
+        <div class="_content">{{book.id}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">书名：</div>
+        <div class="_content">{{book.name}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">副标题：</div>
+        <div class="_content">{{book.subname}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">书籍简介：</div>
+        <div class="_content">{{book.description}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">作者：</div>
+        <div class="_content">{{book.author}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">作者简介：</div>
+        <div class="_content">{{book.authorIntro}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">出版时间：</div>
+        <div class="_content">{{book.published}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">出版社：</div>
+        <div class="_content">{{book.publishing}}</div>
+      </div>
+      <div class="book-item">
+        <div class="_title">包装方式：</div>
+        <div class="_content">{{book.designed}}</div>
+      </div>
+    </div>
+
+    <van-button type="info" size="small">确认添加</van-button>
+  </view>
+
+  <van-toast id="van-toast" />
+
+</scroll-view>

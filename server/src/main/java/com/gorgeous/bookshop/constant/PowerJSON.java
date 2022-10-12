@@ -1,4 +1,4 @@
-package com.gorgeous.bookshop.utils;
+package com.gorgeous.bookshop.constant;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

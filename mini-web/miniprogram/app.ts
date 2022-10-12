@@ -2,8 +2,7 @@
 App<IAppOption>({
   //设置全局请求URL
   globalData:{
-    URL: 'http://127.0.0.1:8080',
-    sessionKey: ''
+    URL: 'http://127.0.0.1:8080'
   },
 
   onLaunch() {
@@ -15,7 +14,12 @@ App<IAppOption>({
     // 登录
     wx.login({
       success: res => {
-        getApp().postRequest('/member/login', {code: res.code}, resp => {
+        let data = {
+          code: res.code,
+          appId: wx.getAccountInfoSync().miniProgram.appId
+        }
+
+        getApp().postRequest('/member/login', data, resp => {
           if (resp.status == -1) {
             wx.showToast({
               title: resp.msg,
@@ -34,7 +38,11 @@ App<IAppOption>({
     })
   },
 
-  getRequest(url, page, pageSize, success, failCallback) {
+  getRequest(url, success, failCallback) {
+    getApp().wxRequest('GET', url, {}, success, failCallback)
+  },
+
+  getRequestWithPage(url, page, pageSize, success, failCallback) {
     if (page !== '' && pageSize != '') {
       url += '?page=' + page + '&pageSize=' + pageSize;
     }

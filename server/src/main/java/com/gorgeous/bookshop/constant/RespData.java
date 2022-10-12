@@ -1,4 +1,4 @@
-package com.gorgeous.bookshop.utils;
+package com.gorgeous.bookshop.constant;
 
 import cn.hutool.core.util.ZipUtil;
 

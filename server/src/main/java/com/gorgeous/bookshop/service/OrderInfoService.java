@@ -1,10 +1,10 @@
 package com.gorgeous.bookshop.service;
 
 import com.gorgeous.bookshop.bean.OrderInfo;
+import com.gorgeous.bookshop.constant.PowerJSON;
+import com.gorgeous.bookshop.constant.RespData;
 import com.gorgeous.bookshop.mapper.OrderInfoMapper;
 import com.gorgeous.bookshop.utils.DateUtil;
-import com.gorgeous.bookshop.utils.PowerJSON;
-import com.gorgeous.bookshop.utils.RespData;
 import com.gorgeous.bookshop.utils.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

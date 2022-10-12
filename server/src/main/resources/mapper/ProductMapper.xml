@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gorgeous.bookshop.mapper.ProductMapper">
 
-    <select id="loadItems" resultType="com.gorgeous.bookshop.utils.PowerJSON">
+    <select id="loadItems" resultType="com.gorgeous.bookshop.constant.PowerJSON">
         select * from item_info order by creatAt desc
     </select>
 
