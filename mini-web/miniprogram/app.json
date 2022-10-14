@@ -6,7 +6,8 @@
     "pages/bookcase/bookcase",
     "pages/friend/friend",
     "pages/shopping/shopping",
-    "pages/bookDetail/bookDetail"
+    "pages/bookDetail/bookDetail",
+    "pages/sale/sale"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,20 +28,20 @@
         "text": "朋友"
       },
       {
-        "pagePath": "pages/shopping/shopping",
-        "text": "商城"
-      },
-      {
-        "pagePath": "pages/bookcase/bookcase",
-        "text": "书架"
-      },
-      {
         "pagePath": "pages/user/user",
+        "text": "我的"
+      },
+      {
+        "pagePath": "pages/sale/sale",
         "text": "我的"
       }
     ]
   },
   "usingComponents": {
-    "van-toast": "@vant/weapp/toast/index"
+    "van-toast": "@vant/weapp/toast/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index"
   }
 }

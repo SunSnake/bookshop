@@ -1,0 +1,22 @@
+<view class="container" xmlns:wx="http://www.w3.org/1999/xhtml"
+      xmlns:model="http://www.w3.org/1999/xhtml">
+
+  <scroll-view scroll-y="true" style="height: 90%;">
+    <div class="card-div" wx:for="{{bookList}}" wx:key="id" wx:for-item="book">
+      <van-swipe-cell right-width="{{65}}">
+        <van-card num="1" price="2.00" desc="描述信息" title="{{book.name}}" thumb="{{book.photoUrl}}"/>
+        <view slot="right">删除</view>
+      </van-swipe-cell>
+    </div>
+  </scroll-view>
+
+  <div id="bottom-div">
+    <div id="total-sum">
+      <span>合计：¥</span>
+      <span model:price="{{ totalPrice }}"></span>
+    </div>
+    <van-button class="bottom-div-btn" type="primary" size="medium" icon="plus" bind:click="navigateToAddBook">添加书籍</van-button>
+    <van-button class="bottom-div-btn" type="info" size="medium" bind:click="navigateToAddBook">提交订单</van-button>
+  </div>
+
+</view>

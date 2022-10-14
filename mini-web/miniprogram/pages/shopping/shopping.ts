@@ -58,6 +58,23 @@ Page({
     })
   },
 
+  confirmAddBook() {
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+
+    let bookList = prevPage.data.bookList;
+    //将旧数据与新数据合并
+    let newList = bookList.concat(this.data.book);
+    prevPage.setData({
+      bookList: newList
+    })
+    console.log(prevPage.data.bookList)
+
+    wx.navigateBack({
+      delta: 1  // 返回上一级页面。
+    });
+  },
+
   onShow() {
     let tabBar = this.getTabBar();
     if (typeof this.getTabBar === 'function' && tabBar) {

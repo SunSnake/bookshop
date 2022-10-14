@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <van-button type="info" size="small">确认添加</van-button>
+    <van-button type="info" size="small" bind:click="confirmAddBook">确认添加</van-button>
   </view>
 
   <van-toast id="van-toast" />

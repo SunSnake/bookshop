@@ -25,7 +25,6 @@
 
   <van-divider />
 
-  <van-cell title="我的购物车" is-link icon="shopping-cart-o"/>
   <van-cell title="我的订单" is-link icon="shop-o"/>
   <van-cell title="客服答疑" is-link icon="phone-o"/>
   <van-cell title="设置" is-link icon="setting-o"/>

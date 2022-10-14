@@ -9,7 +9,7 @@
     <div class="item-show-block padding_LR width_100" wx:for="{{books}}" wx:key="uid" wx:for-item="book"
          bindtap="showItemDetail" data-item="{{book}}">
 
-      <image class="image-class" src="{{book.photoUrl}}" mode="aspectFill"></image>
+      <van-image width="35vw" height="35vw" fit="contain" src="{{book.photoUrl}}" />
       <div class="description-class width_100">{{book.name}}</div>
     </div>
   </scroll-view>
